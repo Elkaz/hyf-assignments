@@ -1,0 +1,154 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "sans-serif", arial;
+  background-color: #f4f6fa;
+  color: #333;
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;        
+  padding: 20px 0;   
+}
+
+.header__container {
+  max-width: 900px;        
+  width: 100%;
+  background: linear-gradient(120deg, #8ec5fc, #e0c3fc);
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+ 
+}
+
+ h1 {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+ p {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  opacity: 0.95;
+  color: #fff;
+}
+
+.main__content {
+  max-width: 900px;
+  background: #fff;
+  margin: auto;
+  padding: 20px 60px 50px;
+  border-radius: 24px;
+}
+
+.about__title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #cfd9e8;
+  display: block;
+  padding-bottom: 6px;
+}
+
+.about_description {
+  color: #555;
+  font-size: 1.05rem;
+  text-align: justify;
+}
+
+.recent-posts {
+  margin-top: 50px;
+}
+
+.recent-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 18px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  background: #f7f9fc;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.recent-posts li:hover {
+  background: #eaf1ff;
+}
+
+.recent-posts a {
+  text-decoration: none;
+  color: #0056ff;
+  font-weight: 500;
+}
+
+.aside {
+  max-width: 900px;
+  background: #fff;
+  margin: 40px auto;
+  padding: 35px 50px;
+  border-left: 5px solid #8ec5fc;
+  border-radius: 14px;
+ 
+}
+
+.aside__bio strong {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.aside__bio p {
+  color: #555;
+  font-size: 1rem;
+  text-align: justify;
+}
+
+footer {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.95rem;
+  color: #666;
+  border-top: 1px solid #d8dce7;
+}
+
+@media (max-width: 768px) {
+  .header__container {
+    padding: 25px 20px;
+  }
+
+  .header__container h1 {
+    font-size: 1.9rem;
+  }
+
+  .main__content,
+  .aside {
+    padding: 25px 20px;
+  }
+
+  .about__title {
+    font-size: 1.4rem;
+  }
+
+  .recent-title {
+    font-size: 1.3rem;
+  }
+}
