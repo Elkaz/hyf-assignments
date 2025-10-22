@@ -1,0 +1,12 @@
+Asia:
+    Syria
+    Emirate
+    Turkey
+    Iran
+
+Europe:
+    France
+    Sweden
+    Greece
+    Spain
+    Hungary
