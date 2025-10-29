@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="portfolio.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Portfolio</title>
+</head>
+<body>
+ <section>
+    <p class="welcome">Welcome to my page!</p>
+    <div class="profile">
+      <div class="profile-info">
+        <h1 class="name">Ela Kazemzadeh</h1>
+        <p>Operations Manager</p>
+        <p>Aspiring Web Developer</p>
+        <button type="button" id="aboutBtn">About me</button>
+        <button id="colorBtn">🎨 Change Background</button>
+      </div>
+      <div class="pic-bg">
+        <img class="pic" src="Ela.K.jpg" alt="My pic" />
+      </div>
+    </div>
+  </section>
+  <section  id="about">
+    <div class="experience">
+        <h1 class="header">About me</h1>
+        <p>I am an adaptable and solution-driven professional with a strong background in project management, business operations, and digital innovation. Currently, I am expanding my software development skills through the 9-month HackYourFuture Denmark program to bridge the gap between technology and business.
+        </p>
+    </div>
+  </section>
+  <section id="skills">
+    <h1 class="header" >Skills</h1>
+    <div class="skills-container">
+      <div class="skill-card">
+        <i class="fas fa-tasks skill-icon"></i>
+        <h2>Project Management</h2>
+        <p>Experienced in planning, executing, and delivering projects efficiently.</p>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-rocket skill-icon"></i>
+        <h2>Business Operations</h2>
+        <p>Skilled in optimizing processes and managing business resources.</p>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-code skill-icon"></i>
+        <h2>Web Development</h2>
+        <p>Learning modern web technologies to build responsive and user-friendly websites.</p>
+      </div>
+    </div>
+  
+    <section id="education">
+      <h1 class="header">Education</h1>
+      <ul class="education-list">
+        <li>
+          <strong>HackYourFuture Denmark</strong><br>
+          Web Development Program (2025)
+        </li>
+        <li>
+          <strong>University of Southern Denmark</strong><br>
+          MSc. Innovation and Business Development
+        </li>
+        <li>
+          <strong>Sharif University of Technology</strong><br>
+          MBA - International Marketing
+        </li>
+      </ul>
+      <a href="Ela-cv.pdf" download class="button-link">
+  <i class="fas fa-download"></i> Download CV
+</a>
+    </section>
+<script>
+
+  const button = document.getElementById('colorBtn');
+
+  button.addEventListener('click', () => {
+    const randomColor1 = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    const randomColor2 = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    document.body.style.background = `linear-gradient(to bottom, ${randomColor1}, ${randomColor2})`;
+  });
+</script>
+<script>
+  document.getElementById('aboutBtn').onclick = function() {
+    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+  };
+</script>
+</body>
+<footer class="social">
+  <div class="social-links">
+    <a href="mailto:ela.kazemzadeh@gmail.com" target="_blank">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://github.com/Elkaz" target="_blank">
+      <i class="fa-brands fa-square-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ela-kazemzadeh/" target="_blank">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+</footer>
+
+</html>
