@@ -20,7 +20,7 @@ const PlanetWishlistItem = ({
 
 
 export const Destinations = () => {
-  const [selectedPlanets, onAddPlanet] = useState([]);
+  const [selectedPlanets, setSelectedPlanets] = useState([]);
 
   let isPlanetSelected = false;
   let numberOfPlanets = 0;

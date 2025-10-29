@@ -1,0 +1,17 @@
+{
+	"name": "task-management-api",
+	"version": "1.0.0",
+	"description": "Simple Express API for database examples",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"prod": "NODE_ENV=production node --watch index.js",
+		"dev": "NODE_ENV=development node --watch index.js"
+	},
+	"dependencies": {
+		"express": "^5.1.0",
+		"knex": "^3.1.0",
+		"pg": "^8.16.3",
+		"sqlite3": "^5.1.7"
+	}
+}

@@ -10,18 +10,28 @@ Galactica is a space travel application built with React. This project aims to t
 ## Getting Started
 
 ### Installation
-1. Navigate to this directory in a terminal
-2. Run `npm install`
+1. Navigate to this directory in a terminal <br/><br/>
+`*` You can also open it in the VS Code terminal from the sidebar, if you already opened the whole directory or any of the parent directories. Right click on the `space-galactica-app` folder:
+
+    <img src="../../../../assets/integrated-terminal.png" width="500" alt="Integrated terminal" /><
+
+    You should get something like this: 
+
+    <img src="../../../../assets/space-galactica-terminal.png" width="600" alt="Space Galactica terminal" />
+
+<br/>
+
+2. Run `npm install` or `npm i` / `yarn install` or `yarn` to install the dependencies, depending on which package manager you chose to use - `npm` or `yarn`. 
 
 ### Running the Development Server
 
-1. Run `npm run dev`
+1. Run `npm run dev` (or `yarn run dev`)
 2. Open your browser and navigate to http://localhost:5173 (or whatever the output of the above command suggets) to see the app in action.
 
 ## Assignments:
 
-Throughout the weeks you will be adding new features to this existing application.
-For your tasks you should be searching for the following in the code:
+Throughout the weeks, you will be adding new features to this existing application.
+For your tasks, search for the following in the code:
 
 - Tasks for week 1: `Task - Week 1`
 - Tasks for week 2: `Task - Week 2`
