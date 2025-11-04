@@ -20,4 +20,3 @@ if (juliaHRealPrice<= juliaHouseIdealPrice){
     console.log(`\x1b[32m✔\x1b[0m It's a Fair price, BUY IT.`);}
 else {
     console.log(`\x1b[31m[✖]\x1b[0m It's expensive, DON'T BUY IT.`);}
-
