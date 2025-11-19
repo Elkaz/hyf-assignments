@@ -43,7 +43,7 @@ function logOutSeriesText() {
     const myLifeTotalDays = (80 - leapYears) * 365 + leapYears * 366 ; // to calculate the leap years.
     const minutesOfMyLife = myLifeTotalDays * 24 * 60; 
    
-    const totalPercent= 0
+    let totalPercent= 0
     seriesDurations.forEach(series => {
         const minutesOfSeries =
             series.days * 24 * 60 +
