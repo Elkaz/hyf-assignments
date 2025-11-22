@@ -8,9 +8,9 @@ function addActivity(date, activity, duration) {
     for (let i =0; i < activities.length; i++) {
         totalTime += activities[i].duration;
     }
-
+    
    //Usage limit : I could't find the right place for usage limit. I know I have to check it before the push but
-   // I will get the limit reached error before getting the status. 
+   // I get the limit reached error before getting the status. 
 
     if (totalTime + duration > usageLimit) {
         console.log(`You have reached your limit, no more smart phoning for you!`)
@@ -23,14 +23,6 @@ function addActivity(date, activity, duration) {
         duration: duration
     });
 }
-addActivity("23/7-18", "Youtube", 30);
-addActivity("23/7-18", "TikTok", 10);
-addActivity("23/7-18", "Instagram", 20);
-addActivity("23/7-18", "Amazon", 25);
-addActivity("23/7-18", "Apple music", 30);
-addActivity("23/7-18", "ebooks", 30);
-
-console.log(activities);
 
 //Show my status
 
@@ -49,7 +41,19 @@ function showStatus(activities) {
     console.log(`You have added ${numberOfActivity} activities. They amount to ${totalTime} min. of usage.`);
 
 }
+
+addActivity("23/7-18", "Youtube", 30);
+addActivity("23/7-18", "TikTok", 10);
+addActivity("23/7-18", "Instagram", 20);
+addActivity("23/7-18", "Apple music", 30);
+
+
 showStatus(activities); 
+console.log(activities);
+
+
+
+
 
 
 
