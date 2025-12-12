@@ -1,0 +1,40 @@
+Identify the components:
+
+***********************************
+1. Where is the recipe data stored?
+The recipe data is stored in the Database.
+
+*****************************************************
+2. How does the frontend communicate with the backend?
+The frontend communicates with the backend using HTTP requests via a Rest API.
+
+Examples of API endpoints we I used in diagram : POST /recipes – create a new recipe or 
+GET /recipes/:id – get a specific recipe  and PUT /recipes/:id – update a recipe.
+
+The frontend sends data in JSON format, and the backend responds with JSON.
+
+**********************************************
+3. What happens when a user adds a new recipe?
+When user add a new recipe, these following steps occur: 
+User clicks "Add Recipe" in the frontend.
+
+The frontend sends a POST request to the backend:
+→ POST /recipes with recipe data (title, ingredients, instructions).
+
+The backend validates the data (for example checks for missing or invalid fields).
+
+If the data is valid:
+
+Backend sends an INSERT query to the database.
+
+Database saves the new recipe and returns the new recipe ID.
+
+Backend responds: 201 Created {id: newId}
+
+The frontend updates the UI and shows that the recipe was added.
+
+If the data is not valid:
+
+Backend returns 400 Bad Request
+
+Frontend shows an error message.
