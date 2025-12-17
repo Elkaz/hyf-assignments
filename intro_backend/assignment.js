@@ -12,10 +12,6 @@ const knex = knexLibrary({
   },
 });
 
-//app.get("/", (req, res) => {
-//res.send("Hello from Ela to the world");
-//});
-
 app.listen(4000, () => {
   console.log("Server is running on http://localhost:4000");
 });
