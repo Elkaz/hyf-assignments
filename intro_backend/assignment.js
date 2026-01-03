@@ -19,82 +19,81 @@ app.listen(4000, () => {
 app.use(bodyParser.json());
 
 app.get("/users", async (req, res) => {
-  const result = await knex.raw("SELECT * FROM users");
-  res.send(result);
-});
-
-app.post("/create", async function (req, res) {
-  const name = req.body.name;
-  const password = req.body.password;
-  await knex.raw(
-    `insert into users (name,password) values('${name}', '${password}')`
-  );
-  res.send("user created");
-});
-
-app.get("/user-count", async (req, res) => {
-  const result = await knex.raw("SELECT COUNT(*) as count FROM users");
-  res.json(result[0]);
+  try {
+    const result = await knex.raw("SELECT * FROM users");
+    if (!result || !result.length)
+      return res.status(404).send({ error: "No users found" });
+    result.send(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 app.get("/users/:id", async (req, res) => {
-  const id = req.params.id;
-  const result = await knex.raw(`SELECT * FROM users WHERE id = ${id}`);
-  res.send(result);
+  try {
+    const id = req.params.id;
+
+    const user = await knex.raw(`SELECT * FROM users WHERE id = ${id}`);
+
+    if (!user || user.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+});
+
+app.post("/create", async (req, res) => {
+  try {
+    const { name, password } = req.body;
+
+    if (!name || !password || name.trim() === "" || password.trim() === "") {
+      return res.status(400).json({
+        error: "Name and password cannot be empty",
+      });
+    }
+
+    await knex.raw(
+      `INSERT INTO users (name, password) VALUES ('${name}', '${password}')`
+    );
+
+    res.status(201).json({ message: "User created successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to create user" });
+  }
+});
+app.get("/user-count", async (req, res) => {
+  try {
+    const result = await knex.raw("SELECT COUNT(*) as count FROM users");
+    res.status(200).json(result[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get user count" });
+  }
 });
 
 app.delete("/users/:id", async (req, res) => {
-  const id = req.params.id;
-  await knex.raw(`DELETE FROM users WHERE id = ${id}`);
-  res.send("User deleted");
+  try {
+    const id = req.params.id;
+
+    const result = await knex.raw(`DELETE FROM users WHERE id = ${id}`);
+
+    if (result.changes === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to delete user" });
+  }
 });
 
 app.get("/", (req, res) => {
-  res.send(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>User Dashboard</title>
-            <style>
-                body {
-                    font-family: sans-serif;
-                    background-color: #233d71ff;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                }
-                .card {
-                    background: white;
-                    padding: 30px 40px;
-                    border-radius: 12px;
-                    box-shadow: 0 8px 20px rgba(41, 39, 39, 0.1);
-                    text-align: center;
-                }
-                h1 {
-                    margin-bottom: 10px;
-                }
-                #count {
-                    font-size: 48px;
-                    color: #8c8a9bff;
-                    margin-top: 10px;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="card">
-                <h1>Total Users</h1>
-                <div id="count"></div>
-            </div>
-
-            <script>
-                fetch('/user-count')
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('count').innerText = data.count;
-                    });
-            </script>
-        </body>
-        </html>
-    `);
+  res.send("/root works!");
 });
