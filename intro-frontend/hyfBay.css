@@ -1,0 +1,63 @@
+body {
+  font-family: "Tahoma", Geneva;
+  background-color: #f2f4f8;
+  padding: 40px 20px;
+  margin: 0;
+  text-align: center;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+#product-list {
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+#product-list li {
+  background-color: #ffffff;
+  padding: 20px 15px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#product-list li:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+#product-list li strong {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#product-list li span.price {
+  font-weight: bold;
+  color: #385069;
+  margin-bottom: 5px;
+}
+
+#product-list li span.rating {
+  color: #f39c12;
+  font-size: 1rem;
+}
