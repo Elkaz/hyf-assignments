@@ -1,0 +1,69 @@
+body {
+  font-family: "Garamond", serif;
+  text-align: center;
+  margin: 0;
+  padding: 50px;
+  background-color: #f4f1ee;
+  color: #222;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #4b2e83;
+  text-shadow: 2px 2px #ccc;
+}
+
+input[type="text"] {
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: 2px solid #4b2e83;
+  outline: none;
+  margin-right: 10px;
+}
+
+input[type="text"]:focus {
+  border-color: #740001;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #4b2e83;
+  color: white;
+  transition: 0.3s all;
+}
+
+button:hover {
+  background-color: #740001;
+  transform: scale(1.05);
+}
+
+#result {
+  margin-top: 30px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.5s all;
+}
+
+.gryffindor {
+  background-color: #af393b;
+  color: #ffdb00;
+}
+.hufflepuff {
+  background-color: #ffdb00;
+  color: #000000;
+}
+.ravenclaw {
+  background-color: #222f5b;
+  color: #ffffff;
+}
+.slytherin {
+  background-color: #1a472a;
+  color: #ffffff;
+}
