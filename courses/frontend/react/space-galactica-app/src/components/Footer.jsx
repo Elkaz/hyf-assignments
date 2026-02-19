@@ -11,9 +11,9 @@ export const Footer = () => {
         <p>Explore the universe and beyond. Your journey to the stars starts here.</p>
         <p>&copy; 2024 Galactica. All rights reserved.</p>
       </div>
-      {/* Task - Week 2 */}
-      {/* Create a new List for the Pages */}
-      {/* We need to use the <Link /> component here */}
+      {/* 🧑🏽‍🚀 Task - Week 2 */}
+      {/* Create a new list for the Pages. */}
+      {/* We need to use the <Link /> component here. */}
       {/* <div className={styles.pages}>
         <h3>Pages</h3>
         <ul>
@@ -21,9 +21,9 @@ export const Footer = () => {
           ...
         </ul>
       </div> */}
-      {/* Docs for the Link: https://reactrouter.com/api/components/Link#link */}
+      {/* Docs for the Link: https://reactrouter.com/api/components/Link#link. */}
 
-      {/* Task - Week 1 */}
+      {/* 🧑🏽‍🚀 Task - Week 1 */}
       {/* Add a new list item for LINKEDIN */}
       <div className={styles.footerLinks}>
         <h3>Follow us</h3>
@@ -40,11 +40,10 @@ export const Footer = () => {
           <li>
             <a href="https://google.com">On the streets at night</a>
           </li>
-          {/* Task - Week 2 */}
+          {/* 🧑🏽‍🚀 Task - Week 2 */}
           {/* Create a <SocialMediaItem /> component and replace all of the list items! */}
-          {/* it should accept the following props */}
-          {/* url, title, icon */}
-          {/* For the icons, you can download 1-2 social media icons for testing and put it in the /public/socialmedia/ folder */}
+          {/* SocialMediaItem should accept the following props: url, title, icon. */}
+          {/* For the icons, you can download 1-2 social media icons for testing and put it in the /public/socialmedia/ folder. */}
         </ul>
       </div>
     </footer>
