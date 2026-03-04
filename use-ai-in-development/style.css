@@ -367,24 +367,3 @@ img {
     font-size: 1.8rem;
   }
 }
-
-/* Social links styling */
-footer.social {
-  text-align: center;
-  padding: var(--spacing-lg);
-  background: transparent;
-}
-
-footer.social .social-links a {
-  margin: 0 16px;
-  font-size: 2.2rem;
-  color: var(--primary-green);
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-footer.social .social-links a:hover {
-  color: var(--black);
-  transform: translateY(-3px);
-  filter: drop-shadow(0 4px 8px var(--shadow-medium));
-}
