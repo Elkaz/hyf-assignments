@@ -92,22 +92,6 @@
         <i class="fas fa-download"></i> Download CV
       </a>
     </section>
-    <script>
-      const button = document.getElementById("colorBtn");
-
-      button.addEventListener("click", () => {
-        const randomColor1 =
-          "#" + Math.floor(Math.random() * 16777215).toString(16);
-        const randomColor2 =
-          "#" + Math.floor(Math.random() * 16777215).toString(16);
-        document.body.style.background = `linear-gradient(to bottom, ${randomColor1}, ${randomColor2})`;
-      });
-    </script>
-    <script>
-      document.getElementById("aboutBtn").onclick = function () {
-        document.getElementById("about").scrollIntoView({ behavior: "smooth" });
-      };
-    </script>
   </body>
   <footer class="social">
     <div class="social-links">
@@ -126,4 +110,5 @@
       </a>
     </div>
   </footer>
+  <script src="script.js"></script>
 </html>
