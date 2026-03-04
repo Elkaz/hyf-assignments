@@ -22,8 +22,8 @@ export const NasaCollaboration = () => {
 
     fetchRoverPhotos();
 
-    // Task - Week 3 
-    // fetch the extra data for NASA_URLs.astronomyPicOfTheDay and save it to the dailyImg state variable
+    // 🧑🏽‍🚀 Task - Week 3 
+    // Fetch the extra data for NASA_URLs.astronomyPicOfTheDay and save it to the dailyImg state variable.
   }, []);
 
   return (
@@ -32,28 +32,25 @@ export const NasaCollaboration = () => {
         <h1>Collaboration with NASA</h1>
         <section className="card">
           <h2>Astronomy Picture of the day</h2>
-          {/* Task - Week 3 */}
-          {/* After fetching data from the NASA_URLs.astronomyPicOfTheDay url, display the returned data here */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
+          {/* After fetching data from the NASA_URLs.astronomyPicOfTheDay url, display the returned data here. */}
           {/* You should display the title, explanation, and the image using the url from the response */}
-          {/* <img src={dailyImg.url}> */}
         </section>
         <section className="card">
           <h2>Rover Photos</h2>
-          {/* Task - Week 3 */}
-          {/* Iterate over the roverPhoto?.photos array and display all the pictures! */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
+          {/* Iterate over the roverPhoto?.photos array and display all the pictures. */}
           {
             roverPhoto?.photos?.length ? (
               <>
-                {/* Task - Week 3 */}
-                {/* Create a react component for the <RoverPhoto />, which should accept the following props */}
-                {/* 1. src: source of the img (img_src in the data from the API) */}
-                {/* 2. date: earth_date data coming from the API */}
-                {/* 3. roverName: will be in the rover object - rover.name */}
+                {/* 🧑🏽‍🚀 Task - Week 3 */}
+                {/* Create a react component for the <RoverPhoto />, which should accept the following props: */}
+                {/* 1. src: source of the img; */}
+                {/* 2. date: earth_date data coming from the API; */}
+                {/* 3. roverName: will be in the rover object. */}
+                
+                {/* If you don't know how the data looks like you can log it out to the console and investigate in the browser's devtools. */}
 
-                {/* TIPS: */}
-                {/* If you don't know how the data looks like you can: */}
-                {/* 1. use console.log() to write the data to the console */}
-                {/* 2. use the network tab in the developer tab - https://developer.chrome.com/docs/devtools/network */}
                 <p>Date {roverPhoto.photos[0]?.earth_date}</p>
                 <img className={styles.nasaPicOfTheDayImg} src={roverPhoto.photos[0]?.img_src} alt={dailyImg.title} />
               </>

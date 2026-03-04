@@ -1,8 +1,5 @@
 .footer {
-  inset-inline-start: 0;
-  inset-inline-end: 0;
-  inset-block-end: 0;
-  background-color: #eee;
+  background-color: #ababab9b;
   color: #000;
   padding: var(--spacing-20) var(--spacing-40);
   display: flex;
