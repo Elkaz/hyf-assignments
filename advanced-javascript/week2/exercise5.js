@@ -1,18 +1,15 @@
-import { teas } from "./teas.js";
-import fs from "fs";
-
 function runSequentially(tasks, finalCallback) {
-  function runNext(index) {
-    if (index === tasks.length) {
+  function runNext(i) {
+    if (i === tasks.length) {
       finalCallback();
       return;
     }
 
     function done() {
-      runNext(index + 1);
+      runNext(i + 1);
     }
 
-    tasks[index](done);
+    tasks[i](done);
   }
 
   runNext(0);
