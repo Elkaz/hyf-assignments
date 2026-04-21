@@ -66,27 +66,19 @@ ORDER BY due_date;
 -----------------------------------------------
 -- PART 3, Question 1 :Add a new column called priority to the task table with possible values: 'Low', 'Medium', 'High'. 💡 Remember to provide default values.
 
-CREATE  TABLE priority (
- id INTEGER PRIMARY KEY AUTOINCREMENT,
- name TEXT NOT NULL UNIQUE
-);
+ALTER TABLE task
+ADD COLUMN priority TEXT NOT NULL DEFAULT 'Low' CHECK (priority IN ('Low', 'Medium', 'High'));
 
-INSERT INTO priority (name) VALUES ('Low');
-INSERT INTO priority (name) VALUES ('Medium');
-INSERT INTO priority (name) VALUES ('High');
-
-ALTER TABLE task ADD COLUMN priority_id INTEGER REFERENCES priority(id) DEFAULT 1;
-SELECT * FROM priority;
 SELECT * FROM task;
 
 -- PART 3, Question 2: Update some existing tasks to have different priority values
 
 UPDATE task 
-SET priority_id = 2
+SET priority = 'Medium'
 WHERE id IN (3,4,12,16,18,22,25,31,33);
 
 UPDATE task 
-SET priority_id = 3
+SET priority = 'High'
 WHERE id IN (5,13,20,27,35,36,39,40);
 
 -- PART 3, Question 3: Create a new table called category with columns:
@@ -141,9 +133,8 @@ WHERE c.name = 'Study';
 
 -- PART 4, Question 2: List tasks ordered by priority (High to Low) and by due date (earliest first)
 
-SELECT t.title, t.due_date, p.name FROM task t
-JOIN priority p ON p.id = t.priority_id
-ORDER BY CASE p.name
+SELECT t.title, t.due_date, t.priority FROM task t
+ORDER BY CASE t.priority
   WHEN 'High' THEN 1
   WHEN 'Medium' THEN 2
   WHEN 'Low' THEN 3
@@ -161,10 +152,9 @@ limit 1;
 
 -- PART 4, Question 4: Get all high priority tasks that are either "In Progress" or "To Do"
 
-SELECT t.title, p.name, s.name FROM task t
-JOIN priority p ON t.priority_id = p.id 
+SELECT t.title, t.priority, s.name FROM task t
 JOIN status s ON s.id = t.status_id 
-WHERE p.id = 3 AND s.id IN (1,2);
+WHERE t.priority = 'High' AND s.id IN (1,2);
 
 
 -- PART 4, Question 5: Find users who have tasks in more than one category
