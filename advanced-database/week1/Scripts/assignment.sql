@@ -23,13 +23,13 @@ WHERE id = 42;
 -- PART 1, Question 4: Change the due date of your task to two weeks from today
 
 UPDATE task
-SET due_date = date('now', '+7 days')
+SET due_date = date('now', '+14 days')
 WHERE id = 42; 
 
 -- PART 1, Question 5: Change the status of your task to "Done"
 
 UPDATE task
-SET status_id = 3
+SET status_id = (SELECT id FROM status WHERE name = 'Done')
 WHERE id = 42;
 
 
@@ -143,7 +143,12 @@ WHERE c.name = 'Study';
 
 SELECT t.title, t.due_date, p.name FROM task t
 JOIN priority p ON p.id = t.priority_id
-ORDER BY t.priority_id DESC, t.due_date ASC;
+ORDER BY CASE p.name
+  WHEN 'High' THEN 1
+  WHEN 'Medium' THEN 2
+  WHEN 'Low' THEN 3
+  ELSE 4
+END ASC, t.due_date ASC;
 
 -- PART 4, Question 3: Find which category has the most tasks
 
@@ -164,7 +169,7 @@ WHERE p.id = 3 AND s.id IN (1,2);
 
 -- PART 4, Question 5: Find users who have tasks in more than one category
 
-SELECT u.name, COUNT(DISTINCT tc.category_id) AS num_of_category,string_agg(c.name ,', ') AS categories FROM "USER" u 
+SELECT u.name, COUNT(DISTINCT tc.category_id) AS num_of_category,GROUP_CONCAT(c.name, ', ') AS categories FROM "USER" u 
 JOIN user_task ut ON u.id = ut.user_id 
 JOIN task_category tc ON tc.task_id = ut.task_id 
 JOIN category c  ON tc.category_id  = c.id 
