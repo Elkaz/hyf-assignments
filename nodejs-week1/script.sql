@@ -64,10 +64,6 @@ CREATE TABLE IF NOT EXISTS snippet_tags (
   FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
 
-INSERT INTO tags (name) VALUES ('javascript');
-INSERT INTO tags (name) VALUES ('nodejs');
-INSERT INTO tags (name) VALUES ('backend');
-
 SELECT * FROM tags;
 
 
