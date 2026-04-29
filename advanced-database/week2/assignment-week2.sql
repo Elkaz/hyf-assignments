@@ -116,6 +116,8 @@ HAVING COUNT(t.id) > 2;
 -- This approach is called a "parameterized query" or "prepared statement".
 
 -- Part C, Question 1: ...your transaction here...
+
+BEGIN TRANSACTION;
 UPDATE task 
 SET user_id = 2   
 WHERE user_id = 1; 
