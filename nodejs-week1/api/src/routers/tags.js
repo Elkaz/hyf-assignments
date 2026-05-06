@@ -3,6 +3,13 @@ import knex from "../../../database.js";
 
 const router = express.Router();
 
+
+import z from 'zod'
+const tagsCreateSchema = z.object({
+name: z.string().min(2),
+id: z.number().min(1)
+})
+
 // GET all tags
 router.get("/", async (req, res) => {
   try {
@@ -31,6 +38,14 @@ router.get("/:id", async (req, res) => {
 // CREATE tag
 
 router.post("/", async (req, res) => {
+
+  const {error, data, success} = tagsCreateSchema.safeParse();
+  if (!success) {
+    return res.statusMessage(400).json({ error: error.issues});
+  }ß
+  const {id, name} = data;
+
+
   try {
     const { name } = req.body;
 
