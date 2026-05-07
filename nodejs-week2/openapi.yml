@@ -1,0 +1,265 @@
+openapi: 3.0.3
+info:
+  title: Snippets API
+  version: 1.0.0
+  description: OpenAPI description for the Week 2 Snippets endpoints.
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/snippets:
+    get:
+      summary: List all snippets
+      tags: [Snippets]
+      responses:
+        "200":
+          description: List of snippets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Snippet"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a snippet
+      tags: [Snippets]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSnippetRequest"
+            examples:
+              valid:
+                value:
+                  title: Hello snippet
+                  contents: console.log("hi")
+                  user_id: 1
+      responses:
+        "201":
+          description: Snippet created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateSnippetResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                missing:
+                  value:
+                    error: Missing title, contents, or user_id
+                invalidUser:
+                  value:
+                    error: Invalid user_id
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/snippets/sort:
+    get:
+      summary: Get snippets with validated sorting
+      tags: [Snippets]
+      parameters:
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            example: title,asc
+          description: Comma-separated value in the format column,direction.
+      responses:
+        "200":
+          description: Sorted snippets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Snippet"
+                required: [data]
+        "400":
+          description: Invalid sort input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                badColumn:
+                  value:
+                    error: Invalid sort column.
+                badDirection:
+                  value:
+                    error: Invalid sort direction.
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/snippets/unsafe:
+    get:
+      summary: Demonstration endpoint with intentionally unsafe sorting
+      tags: [Snippets]
+      parameters:
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          description: Raw SQL sort fragment. Intentionally unsafe.
+      responses:
+        "200":
+          description: Query result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Snippet"
+                required: [data]
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/snippets/public:
+    get:
+      summary: List public snippets only
+      tags: [Snippets]
+      responses:
+        "200":
+          description: Public snippets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Snippet"
+                required: [data]
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/snippets/users/{userId}:
+    get:
+      summary: Get snippets by user id
+      tags: [Snippets]
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Snippets for the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Snippet"
+                required: [data]
+        "400":
+          description: Invalid user id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Invalid userId
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Snippet:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        user_id:
+          type: integer
+        title:
+          type: string
+        contents:
+          type: string
+        is_private:
+          type: integer
+          enum: [0, 1]
+    CreateSnippetRequest:
+      type: object
+      required: [title, contents, user_id]
+      properties:
+        title:
+          type: string
+          minLength: 1
+        contents:
+          type: string
+          minLength: 1
+        user_id:
+          type: integer
+    CreateSnippetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        contents:
+          type: string
+        user_id:
+          type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
