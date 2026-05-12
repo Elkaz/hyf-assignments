@@ -3,32 +3,35 @@ info:
   title: Snippets API
   version: 1.0.0
   description: OpenAPI description for the Week 2 Snippets endpoints.
+
 servers:
   - url: http://localhost:3000
+    description: Local development server
 
 paths:
   /api/snippets:
     get:
       summary: List all snippets
-      tags: [Snippets]
+      tags:
+        - Snippets
       responses:
         "200":
           description: List of snippets
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Snippet"
+                $ref: "#/components/schemas/SnippetListResponse"
         "500":
           description: Server error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
     post:
       summary: Create a snippet
-      tags: [Snippets]
+      tags:
+        - Snippets
       requestBody:
         required: true
         content:
@@ -61,6 +64,14 @@ paths:
                 invalidUser:
                   value:
                     error: Invalid user_id
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
         "500":
           description: Server error
           content:
@@ -71,28 +82,23 @@ paths:
   /api/snippets/sort:
     get:
       summary: Get snippets with validated sorting
-      tags: [Snippets]
+      tags:
+        - Snippets
       parameters:
         - in: query
           name: sort
           required: false
+          description: Comma-separated value in the format column,direction. Allowed columns are id, created_at, and title. Allowed directions are asc and desc.
           schema:
             type: string
             example: title,asc
-          description: Comma-separated value in the format column,direction.
       responses:
         "200":
           description: Sorted snippets
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Snippet"
-                required: [data]
+                $ref: "#/components/schemas/SnippetListResponse"
         "400":
           description: Invalid sort input
           content:
@@ -116,27 +122,22 @@ paths:
   /api/snippets/unsafe:
     get:
       summary: Demonstration endpoint with intentionally unsafe sorting
-      tags: [Snippets]
+      tags:
+        - Snippets
       parameters:
         - in: query
           name: sort
           required: false
+          description: Raw SQL sort fragment. Intentionally unsafe and included only for SQL injection demonstration.
           schema:
             type: string
-          description: Raw SQL sort fragment. Intentionally unsafe.
       responses:
         "200":
           description: Query result
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Snippet"
-                required: [data]
+                $ref: "#/components/schemas/SnippetListResponse"
         "500":
           description: Server error
           content:
@@ -147,20 +148,15 @@ paths:
   /api/snippets/public:
     get:
       summary: List public snippets only
-      tags: [Snippets]
+      tags:
+        - Snippets
       responses:
         "200":
           description: Public snippets
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Snippet"
-                required: [data]
+                $ref: "#/components/schemas/SnippetListResponse"
         "500":
           description: Server error
           content:
@@ -171,11 +167,13 @@ paths:
   /api/snippets/users/{userId}:
     get:
       summary: Get snippets by user id
-      tags: [Snippets]
+      tags:
+        - Snippets
       parameters:
         - in: path
           name: userId
           required: true
+          description: Numeric id of the user
           schema:
             type: integer
             minimum: 1
@@ -185,13 +183,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Snippet"
-                required: [data]
+                $ref: "#/components/schemas/SnippetListResponse"
         "400":
           description: Invalid user id
           content:
@@ -219,47 +211,94 @@ components:
   schemas:
     Snippet:
       type: object
+      required:
+        - id
+        - title
+        - contents
+        - user_id
       properties:
         id:
           type: integer
+          example: 1
         created_at:
           type: string
           format: date-time
+          example: 2026-05-12T10:00:00Z
         user_id:
           type: integer
+          example: 1
         title:
           type: string
+          example: Hello snippet
         contents:
           type: string
+          example: console.log("hi")
         is_private:
           type: integer
           enum: [0, 1]
+          example: 0
+
+    SnippetListResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Snippet"
+
     CreateSnippetRequest:
       type: object
-      required: [title, contents, user_id]
+      required:
+        - title
+        - contents
+        - user_id
       properties:
         title:
           type: string
           minLength: 1
+          example: Hello snippet
         contents:
           type: string
           minLength: 1
+          example: console.log("hi")
         user_id:
           type: integer
+          minimum: 1
+          example: 1
+
     CreateSnippetResponse:
       type: object
+      required:
+        - data
       properties:
-        id:
-          type: integer
-        title:
-          type: string
-        contents:
-          type: string
-        user_id:
-          type: integer
+        data:
+          type: object
+          required:
+            - id
+            - title
+            - contents
+            - user_id
+          properties:
+            id:
+              type: integer
+              example: 10
+            title:
+              type: string
+              example: Hello snippet
+            contents:
+              type: string
+              example: console.log("hi")
+            user_id:
+              type: integer
+              example: 1
+
     Error:
       type: object
+      required:
+        - error
       properties:
         error:
           type: string
-      required: [error]
+          example: Internal server error
