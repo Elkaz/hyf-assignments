@@ -4,7 +4,7 @@ body {
 }
 
 section {
-  background: #666d66; 
+  background: #f5f7f5; 
   border-radius: 16px;
   padding: 32px;
   max-width: 800px;
@@ -17,7 +17,7 @@ section {
 .name {
   font-size: 2rem;
   font-family: 'DM Sans';
-  color: #273927; 
+  color: #1a2e1a; 
 }
 .pic-bg {
   background: #273927; 
@@ -196,7 +196,7 @@ body {
 }
 
 section {
-  background: #666d66; 
+  background: #f5f7f5; 
   border-radius: 16px;
   padding: 32px;
   max-width: 800px;
@@ -209,7 +209,7 @@ section {
 .name {
   font-size: 2rem;
   font-family: 'DM Sans';
-  color: #273927; 
+  color: #1a2e1a; 
 }
 .pic-bg {
   background: #273927; 
