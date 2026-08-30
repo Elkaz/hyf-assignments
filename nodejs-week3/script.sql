@@ -1,0 +1,93 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  created_at DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  confirmed_at DATETIME DEFAULT NULL,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  token TEXT UNIQUE
+);
+
+
+CREATE TABLE snippets (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  created_at DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  user_id INTEGER NOT NULL,
+  title TEXT NOT NULL,
+  contents TEXT NOT NULL,
+  is_private INTEGER NOT NULL DEFAULT 1,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE RESTRICT
+);
+
+INSERT INTO users (first_name, last_name, email, token, confirmed_at)
+VALUES
+('Aiko', 'Tanaka', 'aiko.tanaka@example.com', 'tok123', '2025-01-12 10:30:00'),
+('Mateo', 'García', 'mateo.garcia@example.com', 'mad456', '2025-02-18 14:22:00'),
+('Liam', 'O''Connor', 'liam.oconnor@example.com', 'dub789', '2025-03-09 09:45:00'),
+('Fatima', 'Al-Sayed', 'fatima.alsayed@example.com', 'cai321', '2025-04-01 16:15:00'),
+('Zanele', 'Khumalo', 'zanele.khumalo@example.com', 'jhb654', NULL);
+
+SELECT * FROM users;
+
+INSERT INTO snippets (user_id, title, contents, is_private)
+VALUES
+(1, 'Async in Python', 'A quick guide to using asyncio for concurrent tasks.', 0),
+(1, 'SQL Basics', 'An introduction to SELECT, WHERE, and JOIN in SQL.', 1),
+
+(2, 'React Hooks', 'Explaining useState and useEffect with examples.', 0),
+(2, 'Docker 101', 'Setting up containers for web apps.', 1),
+(2, 'Node.js Tips', 'Best practices for writing clean async code.', 0),
+
+(3, 'Rust Ownership', 'A simple explanation of the ownership model.', 0),
+(3, 'Linux Commands', 'Common shell commands for beginners.', 1),
+
+(4, 'CSS Grid Layout', 'How to build responsive layouts with CSS Grid.', 0),
+(4, 'Tailwind Shortcuts', 'Useful utility classes for quick design.', 1),
+(4, 'Flask REST API', 'Creating a small REST API in Flask.', 0);
+
+SELECT * FROM snippets;
+
+
+CREATE TABLE IF NOT EXISTS tags (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS snippet_tags (
+  snippet_id INTEGER,
+  tag_id INTEGER,
+  PRIMARY KEY (snippet_id, tag_id),
+  FOREIGN KEY (snippet_id) REFERENCES snippets(id),
+  FOREIGN KEY (tag_id) REFERENCES tags(id)
+);
+
+SELECT * FROM tags;
+
+
+SELECT * FROM snippet_tags;
+
+ALTER TABLE users ADD COLUMN password_hash TEXT;
+
+UPDATE users
+SET password_hash = '$2b$10$dXsodDl4n09qyjFGgTHWNO0.ieebmNsuW00EfWcY4XXjGWaDsEdF6'
+WHERE email = 'aiko.tanaka@example.com';
+
+UPDATE users
+SET password_hash = '$2b$10$5oTKXtUMqp6KqLdtcGU3x.ubt1jAcnimaQMXkInRaZaC.xoSIgGKG'
+WHERE email = 'mateo.garcia@example.com';
+
+UPDATE users
+SET password_hash = '$2b$10$/fxMTEGaznDBm1TgImLbhOufMzB9M19b9uwf2JfpLgpuVPKtCsodW'
+WHERE email = 'liam.oconnor@example.com';
+
+UPDATE users
+SET password_hash = '$2b$10$J795ZIENNlrkZdneBmjUR.8QxPa/rCq9p26VhFnCUSSy8jiTDYO0O'
+WHERE email = 'fatima.alsayed@example.com';
+
+UPDATE users
+SET password_hash = '$2b$10$TUtSzeeeGRdFcrxo8bL5WOCYb2cutRdCb7WzibkofHiKHEI/zymTy'
+WHERE email = 'zanele.khumalo@example.com';
+
